@@ -1,2 +1,5 @@
 __pycache__/
 *.py[cod]
+settings_local.py
+/static/
+db.sqlite3

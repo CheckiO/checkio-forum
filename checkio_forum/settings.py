@@ -87,7 +87,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -116,8 +116,13 @@ SOCIAL_AUTH_PIPELINE = (
 
 
 SOCIAL_AUTH_CHECKIO_NAME = 'checkio'
-SOCIAL_AUTH_CHECKIO_KEY = '4GLiDS0mIMyawjZzewwQqxtI_J-nV461EdI7Y_Z_'
-SOCIAL_AUTH_CHECKIO_SECRET = 'AHmqxT=t8-eejX_wJE7UpOgZGKT@xSqIoj=z4!tTDChFv0rFp;nf9jxD62d00NN;wCDNg?A6!Wy:jO2h_Se5UDjRKqaL6-WPh;vOKyfmlz-UufV3mD6e6k:ZqI2gg=OJ'
+SOCIAL_AUTH_CHECKIO_KEY = ''
+SOCIAL_AUTH_CHECKIO_SECRET = ''
 SOCIAL_AUTH_CHECKIO_AUTHORIZATION_URL = 'http://www.checkio.org/oauth/authorize/'
 SOCIAL_AUTH_CHECKIO_ACCESS_TOKEN_URL = 'http://www.checkio.org/oauth/token/'
 SOCIAL_AUTH_CHECKIO_USER_INFO_URL = 'http://www.checkio.org/oauth/information/'
+
+try:
+    from settings_local import *
+except ImportError:
+    pass
