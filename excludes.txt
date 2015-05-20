@@ -1,0 +1,13 @@
+/_requirements.txt
+/requirements.md5
+/excludes.txt
+/Makefile
+/README.md
+/.git
+/.gitignore
+/.gitmodules
+/.hgignore
+/debian
+/man
+/VERSION.txt
+/debian-*

@@ -1,3 +1,3 @@
--e git+https://github.com/nitely/Spirit.git@fbe02f1423f7a833dcdaaeab9baae626e3718876#egg=spirit
+-e git://github.com/nitely/Spirit.git@fbe02f1423f7a833dcdaaeab9baae626e3718876#egg=spirit
 python-social-auth==0.2.7
 psycopg2==2.5.4

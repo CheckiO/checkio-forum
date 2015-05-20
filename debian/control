@@ -1,0 +1,40 @@
+Source: code-empire-forum
+Section: admin
+Priority: extra
+Maintainer: Alex Kulbiy <jncneo@gmail.com>
+Build-Depends: debhelper (>= 8.0.0),
+               dpkg-dev,
+               python-virtualenv,
+               checkio-python (>= 2.7.8-2),
+               libc6 (>= 2.15),
+               libpq5 (>= 8.3~),
+               libssl1.0.0 (>= 1.0.0),
+               libxml2 (>= 2.7.4),
+               libyaml-dev,
+               libxslt1.1 (>= 1.1.26),
+               zlib1g (>= 1:1.2.0),
+               libpq-dev,
+               rsync,
+               git,
+               sudo
+Standards-Version: 3.9.4
+Homepage: https://github.com/CheckiO/checkio-forum
+Vcs-Git: git://github.com/CheckiO/checkio-forum
+Vcs-Browser: https://github.com/CheckiO/checkio-forum
+
+Package: code-empire-forum
+Architecture: amd64
+Depends: python-pip,
+         python-virtualenv,
+         apache2,
+         libapache2-mod-wsgi (= 3.4-4ubuntu2.1.14.04.4),
+         nginx,
+         memcached,
+         libjpeg62,
+         checkio-python (>= 2.7.8-2),
+         libpq5,
+         ${python:Depends},
+         ${shlibs:Depends},
+         ${misc:Depends}
+Description: Package with CheckIO forum
+ This package contains checkio forum
