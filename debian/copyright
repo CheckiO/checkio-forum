@@ -1,0 +1,10 @@
+Format: http://dep.debian.net/deps/dep5
+Upstream-Name: Alex Kulbiy <jncneo@gmail.com>
+Source: https://github.com/CheckiO/code-empire
+
+Files: *
+Copyright: 2015 CheckIO
+Licence: IUO
+
+Licence: IUO
+ For Internal Usage Only. All files are prohibited to be shared anywhere.
