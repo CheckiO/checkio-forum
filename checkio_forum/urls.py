@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'checkio_forum.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    url(r'^test/exception/', lambda a: a.a.a.a.a),
     url(r'^user/login/', SocialLoginRedirect.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
