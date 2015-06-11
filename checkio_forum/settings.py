@@ -125,6 +125,9 @@ SOCIAL_AUTH_CHECKIO_AUTHORIZATION_URL = 'https://www.checkio.org/oauth/authorize
 SOCIAL_AUTH_CHECKIO_ACCESS_TOKEN_URL = 'http://www.checkio.org/oauth/token/'
 SOCIAL_AUTH_CHECKIO_USER_INFO_URL = 'http://www.checkio.org/oauth/information/'
 
+MONITORING_QA_RECIPIENTS = ['qaforum@checkio.org']
+MONITORING_QA_CATEGORIES = ['Bugs']
+
 try:
     from settings_local import *
 except ImportError:
