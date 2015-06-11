@@ -14,8 +14,8 @@ def send_report_email(sender, instance, raw, **kwargs):
         return
 
     send_mail(u'EoC QA: ' + topic.title, u'FROM: ' + instance.user.username + u'\n' +
-              instance.comment, settings.DEFAULT_FROM_EMAIL + u'\n' +
+              instance.comment + u'\n' +
               u'https://' + settings.DOMAIN + instance.get_absolute_url(),
-              settings.MONITORING_QA_RECIPIENTS)
+              settings.DEFAULT_FROM_EMAIL, settings.MONITORING_QA_RECIPIENTS)
 
 post_save.connect(send_report_email, sender=Comment)
