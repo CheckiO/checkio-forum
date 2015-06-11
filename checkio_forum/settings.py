@@ -28,6 +28,8 @@ SECRET_KEY = 'vjb89i%v!xsyh%)(x-)ro0piq=28y5(5u_=9ee0xb0la=_!%0n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+DOMAIN = 'forum.empireofcode.com'
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -127,6 +129,9 @@ SOCIAL_AUTH_CHECKIO_USER_INFO_URL = 'http://www.checkio.org/oauth/information/'
 
 MONITORING_QA_RECIPIENTS = ['qaforum@checkio.org']
 MONITORING_QA_CATEGORIES = ['Bugs']
+
+MONITORING_PR_READER = 'ryanmvachon@gmail.com'
+MONITORING_PR_USERS = ['oduvan', 'bryukh', 'haidamak', 'nickcool']
 
 try:
     from settings_local import *
