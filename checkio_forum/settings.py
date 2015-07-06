@@ -97,7 +97,7 @@ MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
 
 LOGIN_REDIRECT_URL = '/'
@@ -132,6 +132,7 @@ MONITORING_QA_CATEGORIES = ['Bugs']
 
 MONITORING_PR_READER = 'ryanmvachon@gmail.com'
 MONITORING_PR_USERS = ['oduvan', 'bryukh', 'haidamak', 'nickcool']
+
 
 try:
     from settings_local import *
