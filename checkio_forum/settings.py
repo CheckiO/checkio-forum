@@ -46,7 +46,8 @@ _INSTALLED_APPS = (
     'django.contrib.staticfiles',
 )
 
-INSTALLED_APPS += ('social.apps.django_app.default', )
+INSTALLED_APPS += ('social.apps.django_app.default', 'checkio_forum.spirit_email_notification',
+                   'checkio_forum.empire')
 
 _MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
