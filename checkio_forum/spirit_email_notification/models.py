@@ -19,17 +19,24 @@ def send_notification(sender, comment, mentions, **kwargs):
         'quote_url': quote_url,
         'domain': settings.DOMAIN
     }
+    done_emails = set()
     body = render_to_string('spirit_email_notification/new_comment.html', body_context)
     for notif in notifications:
         send_mail('EoC Comment. {}'.format(topic.title),
                   body, settings.DEFAULT_FROM_EMAIL,
                   [notif.user.email])
+        done_emails.add(notif.user.email)
 
     body_ment = render_to_string('spirit_email_notification/mention.html', body_context)
     for user in mentions.values():
+        if comment.user == user:
+            continue
+        if user.email in done_emails:
+            continue
         send_mail('EoC Mention. {}'.format(topic.title),
                   body_ment, settings.DEFAULT_FROM_EMAIL,
-                  [notif.user.email])
+                  [user.email])
+        done_emails.add(user.email)
 
 
 comment_posted.connect(send_notification, dispatch_uid=__name__)
