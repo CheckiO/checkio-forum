@@ -1,4 +1,0 @@
-#!/bin/bash
-PREFIX='/opt/checkio/forum'
-find ${PREFIX} -name \*.pyc -exec rm -f {} \;
-
