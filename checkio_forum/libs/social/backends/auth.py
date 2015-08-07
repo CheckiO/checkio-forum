@@ -2,7 +2,6 @@ import json
 import urllib
 
 from django.conf import settings
-
 from social.backends.oauth import BaseOAuth2
 
 
