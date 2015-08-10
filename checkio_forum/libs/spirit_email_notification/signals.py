@@ -25,7 +25,6 @@ def send_email_notification(sender, instance, raw, **kwargs):
             'EoC Comment. {}'.format(instance.comment.topic.title),
             body, settings.DEFAULT_FROM_EMAIL,
             [instance.topic.user.email])
-# TODO:
 
 
 def send_report_email(sender, instance, raw, **kwargs):
