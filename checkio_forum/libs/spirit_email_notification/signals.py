@@ -12,19 +12,19 @@ from spirit.topic.notification.models import TopicNotification
 def send_email_notification(sender, instance, raw, **kwargs):
     if raw:
         return
-    Topic_not = TopicNotification.objects.all()
-    for topic in Topic_not:
-        if topic.is_read == False:
-            quote_url = 'sdfsdf'
-            body_context = {
-                'comment': topic.comment,
-                'quote_url': quote_url,
-                'domain': settings.DOMAIN
-            }
-            body = render_to_string('spirit_email_notification/new_comment.html', body_context)
-            send_mail('EoC Comment. {}'.format(topic.comment.topic.title),
-                body, settings.DEFAULT_FROM_EMAIL,
-                [topic.user.email])
+    #Topic_not = TopicNotification.objects.all()
+    #for topic in Topic_not:
+    #    if topic.is_read == False:
+    quote_url = 'sdfsdf'
+    body_context = {
+        'comment': instance.comment,
+        'quote_url': quote_url,
+        'domain': settings.DOMAIN
+    }
+    body = render_to_string('spirit_email_notification/new_comment.html', body_context)
+    send_mail('EoC Comment. {}'.format(instance.comment.topic.title),
+        body, settings.DEFAULT_FROM_EMAIL,
+        [instance.user.email])
 
 
 # TODO:
