@@ -7,25 +7,24 @@ from django.core.urlresolvers import reverse
 
 from spirit.comment.models import Comment
 from spirit.topic.notification.models import TopicNotification
-# TODO:
 
-@receiver(post_save, sender = TopicNotification)
+
+@receiver(post_save, sender=TopicNotification)
 def send_email_notification(sender, instance, raw, **kwargs):
-    if raw:
-        return
     if instance.user != instance.topic.user:
-        quote_url = reverse('spirit:comment:publish', kwargs={'topic_id': instance.topic.id,'pk': instance.comment.id})
+        quote_url = reverse(
+            'spirit:comment:publish',
+            kwargs={'topic_id': instance.topic.id, 'pk': instance.comment.id})
         body_context = {
             'comment': instance.comment,
             'quote_url': quote_url,
             'domain': settings.DOMAIN
         }
         body = render_to_string('spirit_email_notification/new_comment.html', body_context)
-        send_mail('EoC Comment. {}'.format(instance.comment.topic.title),
+        send_mail(
+            'EoC Comment. {}'.format(instance.comment.topic.title),
             body, settings.DEFAULT_FROM_EMAIL,
             [instance.topic.user.email])
-
-
 # TODO:
 
 
@@ -72,6 +71,6 @@ def send_report_email(sender, instance, raw, **kwargs):
         from_email=settings.DEFAULT_FROM_EMAIL,
         to=[settings.MONITORING_PR_READER],
         headers={'Reply-To': user.email}
-     ).send()
+    ).send()
 
 post_save.connect(send_report_email, sender=Comment)

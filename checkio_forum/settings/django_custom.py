@@ -1,7 +1,7 @@
 import os
 
 from .django import BASE_DIR
-from spirit.settings import *
+from spirit.settings import * #noqa
 
 
 DOMAIN = 'forum.empireofcode.com'
