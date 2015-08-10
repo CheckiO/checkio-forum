@@ -124,7 +124,7 @@ SOCIAL_AUTH_PIPELINE = (
 SOCIAL_AUTH_CHECKIO_NAME = 'checkio'
 SOCIAL_AUTH_CHECKIO_KEY = ''
 SOCIAL_AUTH_CHECKIO_SECRET = ''
-SOCIAL_AUTH_CHECKIO_AUTHORIZATION_URL = 'https://www.checkio.org/oauth/authorize/'
+SOCIAL_AUTH_CHECKIO_AUTHORIZATION_URL = 'http://www.checkio.org/oauth/authorize/'
 SOCIAL_AUTH_CHECKIO_ACCESS_TOKEN_URL = 'http://www.checkio.org/oauth/token/'
 SOCIAL_AUTH_CHECKIO_USER_INFO_URL = 'http://www.checkio.org/oauth/information/'
 
