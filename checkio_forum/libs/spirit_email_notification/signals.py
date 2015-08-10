@@ -22,11 +22,9 @@ def send_email_notification(sender, instance, raw, **kwargs):
                 'domain': settings.DOMAIN
             }
             body = render_to_string('spirit_email_notification/new_comment.html', body_context)
-            done_emails = set()
             send_mail('EoC Comment. {}'.format(topic.comment.topic.title),
                 body, settings.DEFAULT_FROM_EMAIL,
                 [topic.user.email])
-            done_emails.add(topic.user.email)
 
 
 # TODO:
