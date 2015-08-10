@@ -15,16 +15,18 @@ def send_email_notification(sender, instance, raw, **kwargs):
     #Topic_not = TopicNotification.objects.all()
     #for topic in Topic_not:
     #    if topic.is_read == False:
-    quote_url = 'sdfsdf'
-    body_context = {
-        'comment': instance.comment,
-        'quote_url': quote_url,
-        'domain': settings.DOMAIN
-    }
-    body = render_to_string('spirit_email_notification/new_comment.html', body_context)
-    send_mail('EoC Comment. {}'.format(instance.comment.topic.title),
-        body, settings.DEFAULT_FROM_EMAIL,
-        [instance.user.email])
+    print str(instance.topic.user)
+    if instance.user != instance.topic.user:
+        quote_url = 'sdfsdf'
+        body_context = {
+            'comment': instance.comment,
+            'quote_url': quote_url,
+            'domain': settings.DOMAIN
+        }
+        body = render_to_string('spirit_email_notification/new_comment.html', body_context)
+        send_mail('EoC Comment. {}'.format(instance.comment.topic.title),
+            body, settings.DEFAULT_FROM_EMAIL,
+            [instance.topic.user.email])
 
 
 # TODO:
