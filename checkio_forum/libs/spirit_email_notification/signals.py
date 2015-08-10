@@ -1,38 +1,35 @@
 from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
-from django.core.urlresolvers import reverse
+from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.template.loader import render_to_string
 
 from spirit.comment.models import Comment
 from spirit.topic.notification.models import TopicNotification
-#from spirit.signals.comment import comment_posted  # TODO:
+# TODO:
 
-
-def deb(sender, instance, raw, **kwargs):
+@receiver(post_save, sender = TopicNotification)
+def send_email_notification(sender, instance, raw, **kwargs):
     if raw:
         return
-    TopNot = TopicNotification.objects.all()
-    for TN in TopNot:
-        if TN.is_read == False:
-            comment = TN.comment
-            topic = comment.topic
+    Topic_not = TopicNotification.objects.all()
+    for topic in Topic_not:
+        if topic.is_read == False:
             quote_url = 'sdfsdf'
             body_context = {
-                'comment': comment,
+                'comment': topic.comment,
                 'quote_url': quote_url,
                 'domain': settings.DOMAIN
             }
             body = render_to_string('spirit_email_notification/new_comment.html', body_context)
             done_emails = set()
-            send_mail('EoC Comment. {}'.format(topic.title),
+            send_mail('EoC Comment. {}'.format(topic.comment.topic.title),
                 body, settings.DEFAULT_FROM_EMAIL,
-                [TN.user.email])
-            done_emails.add(TN.user.email)
+                [topic.user.email])
+            done_emails.add(topic.user.email)
 
-post_save.connect(deb, sender=TopicNotification)
 
-# comment_posted.connect(send_notification, dispatch_uid=__name__)  # TODO:
+# TODO:
 
 
 def send_report_email(sender, instance, raw, **kwargs):
