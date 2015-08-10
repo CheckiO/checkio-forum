@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from django.conf import settings
 
+from libs.spirit_email_notification import signals
 
 class SocialLoginRedirect(RedirectView):
     permanent = False

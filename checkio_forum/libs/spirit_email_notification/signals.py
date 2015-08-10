@@ -6,39 +6,31 @@ from django.template.loader import render_to_string
 
 from spirit.comment.models import Comment
 from spirit.topic.notification.models import TopicNotification
-# from spirit.signals.comment import comment_posted  # TODO:
+#from spirit.signals.comment import comment_posted  # TODO:
 
 
-def send_notification(sender, comment, mentions, **kwargs):
-    topic = comment.topic
-    notifications = TopicNotification.objects.filter(topic=topic, is_active=True)\
-        .exclude(user=comment.user)
-    quote_url = reverse('spirit:comment-publish', kwargs={'topic_id': topic.id, 'pk': comment.id})
+def deb(sender, instance, raw, **kwargs):
+    if raw:
+        return
+    TopNot = TopicNotification.objects.all()
+    for TN in TopNot:
+        if TN.is_read == False:
+            comment = TN.comment
+            topic = comment.topic
+            quote_url = 'sdfsdf'
+            body_context = {
+                'comment': comment,
+                'quote_url': quote_url,
+                'domain': settings.DOMAIN
+            }
+            body = render_to_string('spirit_email_notification/new_comment.html', body_context)
+            done_emails = set()
+            send_mail('EoC Comment. {}'.format(topic.title),
+                body, settings.DEFAULT_FROM_EMAIL,
+                [TN.user.email])
+            done_emails.add(TN.user.email)
 
-    body_context = {
-        'comment': comment,
-        'quote_url': quote_url,
-        'domain': settings.DOMAIN
-    }
-    done_emails = set()
-    body = render_to_string('spirit_email_notification/new_comment.html', body_context)
-    for notif in notifications:
-        send_mail('EoC Comment. {}'.format(topic.title),
-                  body, settings.DEFAULT_FROM_EMAIL,
-                  [notif.user.email])
-        done_emails.add(notif.user.email)
-
-    if mentions:
-        body_ment = render_to_string('spirit_email_notification/mention.html', body_context)
-        for user in mentions.values():
-            if comment.user == user:
-                continue
-            if user.email in done_emails:
-                continue
-            send_mail('EoC Mention. {}'.format(topic.title),
-                      body_ment, settings.DEFAULT_FROM_EMAIL,
-                      [user.email])
-            done_emails.add(user.email)
+post_save.connect(deb, sender=TopicNotification)
 
 # comment_posted.connect(send_notification, dispatch_uid=__name__)  # TODO:
 
