@@ -3,6 +3,7 @@ from django.core.mail import send_mail, EmailMessage
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.template.loader import render_to_string
+from django.core.urlresolvers import reverse
 
 from spirit.comment.models import Comment
 from spirit.topic.notification.models import TopicNotification
@@ -13,7 +14,7 @@ def send_email_notification(sender, instance, raw, **kwargs):
     if raw:
         return
     if instance.user != instance.topic.user:
-        quote_url = 'sdfsdf'
+        quote_url = reverse('spirit:comment:publish', kwargs={'topic_id': instance.topic.id,'pk': instance.comment.id})
         body_context = {
             'comment': instance.comment,
             'quote_url': quote_url,
