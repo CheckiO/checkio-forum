@@ -12,10 +12,6 @@ from spirit.topic.notification.models import TopicNotification
 def send_email_notification(sender, instance, raw, **kwargs):
     if raw:
         return
-    #Topic_not = TopicNotification.objects.all()
-    #for topic in Topic_not:
-    #    if topic.is_read == False:
-    print str(instance.topic.user)
     if instance.user != instance.topic.user:
         quote_url = 'sdfsdf'
         body_context = {
