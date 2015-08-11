@@ -11,20 +11,24 @@ from spirit.topic.notification.models import TopicNotification
 
 @receiver(post_save, sender=TopicNotification)
 def send_email_notification(sender, instance, raw, **kwargs):
+    quote_url = reverse(
+        'spirit:comment:publish',
+        kwargs={'topic_id': instance.topic.id, 'pk': instance.comment.id})
+    body_context = {
+        'comment': instance.comment,
+        'quote_url': quote_url,
+        'domain': settings.DOMAIN
+    }
+    body = render_to_string('spirit_email_notification/new_comment.html', body_context)
+    send_mail(
+        'EoC Comment. {}'.format(instance.comment.topic.title),
+        body, settings.DEFAULT_FROM_EMAIL,
+        [instance.topic.user.email])
     if instance.user != instance.topic.user:
-        quote_url = reverse(
-            'spirit:comment:publish',
-            kwargs={'topic_id': instance.topic.id, 'pk': instance.comment.id})
-        body_context = {
-            'comment': instance.comment,
-            'quote_url': quote_url,
-            'domain': settings.DOMAIN
-        }
-        body = render_to_string('spirit_email_notification/new_comment.html', body_context)
         send_mail(
             'EoC Comment. {}'.format(instance.comment.topic.title),
             body, settings.DEFAULT_FROM_EMAIL,
-            [instance.topic.user.email])
+            [instance.user.email])
 
 
 def send_report_email(sender, instance, raw, **kwargs):
