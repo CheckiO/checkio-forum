@@ -20,15 +20,17 @@ def send_email_notification(sender, instance, raw, **kwargs):
         'domain': settings.DOMAIN
     }
     body = render_to_string('spirit_email_notification/new_comment.html', body_context)
-    send_mail(
-        'EoC Comment. {}'.format(instance.comment.topic.title),
-        body, settings.DEFAULT_FROM_EMAIL,
-        [instance.topic.user.email])
-    if instance.user != instance.topic.user:
+    comment_all = Comment.objects.all()
+    email_to_send = set()
+    for coment in comment_all:
+        if instance.topic.id == coment.topic.id:
+            if instance.user != coment.user:
+                email_to_send.add(coment.user.email)
+    for email in email_to_send:
         send_mail(
             'EoC Comment. {}'.format(instance.comment.topic.title),
             body, settings.DEFAULT_FROM_EMAIL,
-            [instance.user.email])
+            [email])
 
 
 def send_report_email(sender, instance, raw, **kwargs):
