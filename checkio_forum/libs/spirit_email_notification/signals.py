@@ -6,8 +6,10 @@ from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 
 from spirit.comment.models import Comment
+from huey.djhuey import task
 
 
+@task()
 @receiver(post_save, sender=Comment)
 def send_email_notification(sender, instance, raw, **kwargs):
     quote_url = reverse(
