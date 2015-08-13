@@ -6,29 +6,28 @@ from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
 
 from spirit.comment.models import Comment
-from spirit.topic.notification.models import TopicNotification
 
 
-@receiver(post_save, sender=TopicNotification)
+@receiver(post_save, sender=Comment)
 def send_email_notification(sender, instance, raw, **kwargs):
     quote_url = reverse(
         'spirit:comment:publish',
-        kwargs={'topic_id': instance.topic.id, 'pk': instance.comment.id})
+        kwargs={'topic_id': instance.topic.id, 'pk': instance.id})
     body_context = {
-        'comment': instance.comment,
+        'comment': instance,
         'quote_url': quote_url,
         'domain': settings.DOMAIN
     }
     body = render_to_string('spirit_email_notification/new_comment.html', body_context)
     comment_all = Comment.objects.all()
     email_to_send = set()
-    for coment in comment_all:
-        if instance.topic.id == coment.topic.id:
-            if instance.user != coment.user:
-                email_to_send.add(coment.user.email)
+    for comment in comment_all:
+        if instance.topic.id == comment.topic.id:
+            if instance.user != comment.user:
+                email_to_send.add(comment.user.email)
     for email in email_to_send:
         send_mail(
-            'EoC Comment. {}'.format(instance.comment.topic.title),
+            'EoC Comment. {}'.format(instance.topic.title),
             body, settings.DEFAULT_FROM_EMAIL,
             [email])
 
