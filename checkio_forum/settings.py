@@ -135,6 +135,10 @@ MONITORING_PR_READER = 'ryanmvachon@gmail.com'
 MONITORING_PR_USERS = ['oduvan', 'bryukh', 'haidamak', 'nickcool']
 
 
+AWS_STATIC_LOCATION = 'static'
+AWS_MEDIA_LOCATION = 'media'
+
+
 try:
     from settings_local import *
 except ImportError:
