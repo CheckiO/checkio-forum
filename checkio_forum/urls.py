@@ -26,13 +26,12 @@ urlpatterns = patterns('',
     url(r'^', include('spirit.urls')),
 )
 
-if settings.DEBUG:
-    urlpatterns += patterns(
-        'django.views.static',
-        url(r'^' + settings.STATIC_URL[1:] + '(.*)$',
-            'serve',
-            dict(document_root=settings.STATIC_ROOT)),
-        url(r'^' + settings.MEDIA_URL[1:] + '(.*)$',
-            'serve',
-            dict(document_root=settings.MEDIA_ROOT)),
-    )
+urlpatterns += patterns(
+    'django.views.static',
+    url(r'^' + settings.STATIC_URL[1:] + '(.*)$',
+        'serve',
+        dict(document_root=settings.STATIC_ROOT)),
+    url(r'^' + settings.MEDIA_URL[1:] + '(.*)$',
+        'serve',
+        dict(document_root=settings.MEDIA_ROOT)),
+)
