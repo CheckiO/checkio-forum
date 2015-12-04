@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.mail import EmailMessage
-from spirit.models.comment import Comment
+from spirit.comment.models import Comment
 
 from django.db.models.signals import post_save
 
