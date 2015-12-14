@@ -1,8 +1,10 @@
-[You got this email because you subscribed to the topic from {{domain}} by {{comment.topic.user}}]
+[You got this email because you subscribed to the topic from {{domain}}]
 
 Topic: {{comment.topic.title}}
+Topic author: {{comment.topic.user}}
 
-{{comment.comment|safe}}
+Comment: {{comment.comment|safe}}
+Comment author: {{comment.user}}
 
 Open : https://{{domain}}{{comment.get_absolute_url}}
 Reply: https://{{domain}}{{quote_url}}

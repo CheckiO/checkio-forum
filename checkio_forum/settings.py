@@ -27,8 +27,6 @@ SECRET_KEY = 'vjb89i%v!xsyh%)(x-)ro0piq=28y5(5u_=9ee0xb0la=_!%0n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 DOMAIN = 'forum.empireofcode.com'
 
 ALLOWED_HOSTS = []
@@ -50,7 +48,7 @@ ROOT_URLCONF = 'checkio_forum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,8 +101,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
 LOGIN_REDIRECT_URL = '/'
 
