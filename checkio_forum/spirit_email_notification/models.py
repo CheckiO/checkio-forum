@@ -33,7 +33,7 @@ def send_notifications(instance, **kwargs):
     body = render_to_string('spirit_email_notification/new_comment.html', body_context)
     for notification in notifications:
         send_mail(
-            'EoC Comment. {}'.format(topic.title),
+            u'EoC Comment. {}'.format(topic.title),
             body,
             settings.DEFAULT_FROM_EMAIL,
             [notification.user.email])
@@ -53,7 +53,7 @@ def send_notifications(instance, **kwargs):
             if user.email in received_emails:
                 continue
             send_mail(
-                'EoC Mention. {}'.format(topic.title),
+                u'EoC Mention. {}'.format(topic.title),
                 body_mentioning,
                 settings.DEFAULT_FROM_EMAIL,
                 [user.email])
