@@ -36,7 +36,7 @@ def send_notifications(instance, **kwargs):
             u'EoC Comment. {}'.format(topic.title),
             body,
             settings.DEFAULT_FROM_EMAIL,
-            [notification.user.email])
+            [notification.user.email], fail_silently=True)
         received_emails.add(notification.user.email)
 
     from spirit.core.utils.markdown import Markdown
@@ -56,5 +56,5 @@ def send_notifications(instance, **kwargs):
                 u'EoC Mention. {}'.format(topic.title),
                 body_mentioning,
                 settings.DEFAULT_FROM_EMAIL,
-                [user.email])
+                [user.email], fail_silently=True)
             received_emails.add(user.email)
