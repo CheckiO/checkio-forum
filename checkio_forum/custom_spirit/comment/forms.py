@@ -10,6 +10,8 @@ from django.core.files.storage import default_storage
 from django.utils.translation import ugettext_lazy as _
 
 from checkio_forum.libs.storages.s3 import MediaStorageS3
+from storages.backends.sftpstorage import SFTPStorage
+
 
 from spirit.core import utils
 
@@ -37,11 +39,12 @@ class CommentImageForm(forms.Form):
         file = self.cleaned_data['image']
         file_hash = utils.get_hash(file)
         file.name = ''.join((file_hash, '.', file.image.format.lower()))
-        if isinstance(default_storage, MediaStorageS3):
-            default_storage.save(file.name, file)
-            return default_storage.url(file.name)
+        if isinstance(default_storage, MediaStorageS3) or isinstance(default_storage, SFTPStorage):
+            save_to_file = settings.COMMENT_FILES_FOLDER + '/' + file.name
+            default_storage.save(save_to_file, file)
+            return default_storage.url(save_to_file)
         else:
-            upload_to = os.path.join('spirit', 'images', str(self.user.pk))
+            upload_to = os.path.join(settings.COMMENT_FILES_FOLDER, str(self.user.pk))
             file.url = os.path.join(settings.MEDIA_URL, upload_to, file.name).replace("\\", "/")
             media_path = os.path.join(settings.MEDIA_ROOT, upload_to)
             utils.mkdir_p(media_path)

@@ -40,6 +40,7 @@ INSTALLED_APPS += (
     'checkio_forum.custom_spirit',
     'checkio_forum.empire',
     'checkio_forum.spirit_email_notification',
+    'storages'
 )
 
 
@@ -142,6 +143,8 @@ AWS_S3_FILE_OVERWRITE = False
 
 AWS_STATIC_LOCATION = 'static'
 AWS_MEDIA_LOCATION = 'media'
+
+COMMENT_FILES_FOLDER = 'media'
 
 
 try:
