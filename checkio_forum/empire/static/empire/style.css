@@ -22,8 +22,8 @@
   font-family: 'Roboto';
   src: url("/static/empire/fonts/Roboto-Bold-webfont.eot");
   src: url("/static/empire/fonts/Roboto-Bold-webfont.eot?#iefix") format('embedded-opentype'),
-       url("/static/fonts/empire/Roboto-Bold-webfont.woff") format('woff'),
-       url("/static/fonts/Roboto-Bold-webfont.ttf") format('truetype'),
+       url("/static/empire/fonts/Roboto-Bold-webfont.woff") format('woff'),
+       url("/static/empire/fonts/Roboto-Bold-webfont.ttf") format('truetype'),
        url("/static/empire/fonts/Roboto-Bold-webfont.svg#RobotoBold") format('svg');
   font-weight: bold;
   font-style: normal;
