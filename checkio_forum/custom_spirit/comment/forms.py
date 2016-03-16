@@ -39,20 +39,6 @@ class CommentImageForm(forms.Form):
         file = self.cleaned_data['image']
         file_hash = utils.get_hash(file)
         file.name = ''.join((file_hash, '.', file.image.format.lower()))
-        if isinstance(default_storage, MediaStorageS3) or isinstance(default_storage, SFTPStorage):
-            save_to_file = settings.COMMENT_FILES_FOLDER + '/' + file.name
-            default_storage.save(save_to_file, file)
-            return default_storage.url(save_to_file)
-        else:
-            upload_to = os.path.join(settings.COMMENT_FILES_FOLDER, str(self.user.pk))
-            file.url = os.path.join(settings.MEDIA_URL, upload_to, file.name).replace("\\", "/")
-            media_path = os.path.join(settings.MEDIA_ROOT, upload_to)
-            utils.mkdir_p(media_path)
-
-            with open(os.path.join(media_path, file.name), 'wb') as fh:
-                for c in file.chunks():
-                    fh.write(c)
-
-                file.close()
-
-            return file.url
+        save_to_file = settings.COMMENT_FILES_FOLDER + '/' + file.name
+        default_storage.save(save_to_file, file)
+        return default_storage.url(save_to_file)
