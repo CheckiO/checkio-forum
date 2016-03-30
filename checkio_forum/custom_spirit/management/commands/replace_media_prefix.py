@@ -1,15 +1,11 @@
-import os
-import re
-from StringIO import StringIO
+# TODO: on every launch emails sent to user because of spirit_email_notification
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
-from django.core.files.storage import default_storage
 
 from spirit.comment.models import Comment
 
 REPLACE_FROM = 'https://empire-forum.s3.amazonaws.com/media/'
-REPLACE_TO = 'https://forum.static.empireofcode.com/media/'
+REPLACE_TO = 'https://static.empireofcode.com/forum/media/comments/'
 
 
 class Command(BaseCommand):
