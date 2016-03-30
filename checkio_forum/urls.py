@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.views.generic.base import RedirectView
 from django.conf import settings
 
+admin.autodiscover()
 
 class SocialLoginRedirect(RedirectView):
     permanent = False
